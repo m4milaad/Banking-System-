@@ -1,7 +1,5 @@
 import java.awt.*;
 import java.awt.event.*;
-import java.util.List;
-import java.util.ArrayList;
 
 public class BankingSystemGUI extends Frame implements ActionListener {
     private Bank bank;
