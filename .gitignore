@@ -2,4 +2,6 @@ node_modules/
 .env
 .class
 .gitignore
-
+out
+/.idea
+.iml
