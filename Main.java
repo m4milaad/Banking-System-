@@ -13,7 +13,7 @@ public class Main {
         if (UIChoice == 1) {
             new BankingSystemGUI();
         }
-        if (UIChoice == 2) {
+        else if (UIChoice == 2) {
             Bank bank = new Bank();
 
             boolean exit = false;
