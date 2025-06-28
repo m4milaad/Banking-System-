@@ -34,7 +34,8 @@ A simple yet powerful desktop banking application written in Java using AWT. Thi
 ```
 
 ## 📸 Screenshots
-*Coming soon*
+![image](https://github.com/user-attachments/assets/aa931d92-9ad7-4504-a0af-ffae047a9473)
+
 
 ## 💡 How to Run
 1. Clone the repository:
