@@ -63,8 +63,8 @@ A simple yet powerful desktop banking application written in Java using AWT. Thi
 - Secure admin login with password hashing
 
 ## 👥 Authors
-- Milad Ajaz Bhat
 - Nimra Wani
+- Milad Ajaz Bhat
 - Adnan Zargar
 - Mehdi Hafiz
 - Saliq Naqash
