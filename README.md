@@ -39,7 +39,7 @@ A simple yet powerful desktop banking application written in Java using AWT. Thi
 ## 💡 How to Run
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/BankingSystem.git
+   git clone https://github.com/m4milaad/Banking-System-.git
    ```
 2. Compile the project:
    ```bash
