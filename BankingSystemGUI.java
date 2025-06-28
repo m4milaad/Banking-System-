@@ -44,8 +44,8 @@ public class BankingSystemGUI extends Frame implements ActionListener {
     private TextArea resultArea;
     private Button backFromResultBtn;
 
-    private static final String ADMIN_USERNAME = "milad";
-    private static final String ADMIN_PASSWORD = "milad3103";
+    private static final String ADMIN_USERNAME = "admin";
+    private static final String ADMIN_PASSWORD = "admin3103";
 
     public BankingSystemGUI() {
         bank = new Bank();
