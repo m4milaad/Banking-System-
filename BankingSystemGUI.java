@@ -17,8 +17,9 @@ public class BankingSystemGUI extends Frame implements ActionListener {
 
     // Account creation components
     private static int nextAccountNumber = 1000;
-    private TextField accNumField, accTypeField, nameField, emailField, phoneField;
+    private TextField accNumField, nameField, emailField, phoneField;
     private Button createAccBtn, backFromCreateBtn;
+    private Choice accTypeChoice;
 
     // Transaction components
     private TextField accountNumField, amountField;
@@ -70,7 +71,6 @@ public class BankingSystemGUI extends Frame implements ActionListener {
 
         add(mainPanel, BorderLayout.CENTER);
 
-        // Window closing event
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
@@ -219,8 +219,11 @@ public class BankingSystemGUI extends Frame implements ActionListener {
         gbc.gridy = 2;
         panel.add(new Label("Account Type:"), gbc);
         gbc.gridx = 1;
-        accTypeField = new TextField(20);
-        panel.add(accTypeField, gbc);
+        accTypeChoice = new Choice();
+        accTypeChoice.add("Savings");
+        accTypeChoice.add("Current");
+        panel.add(accTypeChoice, gbc);
+
 
         gbc.gridx = 0;
         gbc.gridy = 3;
@@ -571,7 +574,7 @@ public class BankingSystemGUI extends Frame implements ActionListener {
         try {
             int accNum = nextAccountNumber++;
             accNumField.setText(String.valueOf(accNum));
-            String accType = accTypeField.getText();
+            String accType = accTypeChoice.getSelectedItem();
             String name = nameField.getText();
             String email = emailField.getText();
             String phone = phoneField.getText();
@@ -754,7 +757,6 @@ public class BankingSystemGUI extends Frame implements ActionListener {
 
     private void handleListLoans() {
         adminTextArea.setText("");
-        // Capture the output from bank.listAllLoans()
         java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
         java.io.PrintStream ps = new java.io.PrintStream(baos);
         java.io.PrintStream old = System.out;
@@ -824,8 +826,7 @@ public class BankingSystemGUI extends Frame implements ActionListener {
         passwordField.setText("");
 
         // Clear account creation fields
-        accNumField.setText("");
-        accTypeField.setText("");
+        accTypeChoice.select(0);
         nameField.setText("");
         emailField.setText("");
         phoneField.setText("");

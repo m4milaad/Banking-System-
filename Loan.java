@@ -1,5 +1,5 @@
 class Loan {
-    private static int loanCounter = 0; // Static counter to generate unique loan IDs
+    private static int loanCounter = 0; 
     private int loanId;
     private BankAccount borrowerAccount;
     private double loanAmount;
@@ -8,7 +8,7 @@ class Loan {
     private boolean isApproved;
 
     public Loan(BankAccount borrowerAccount, double loanAmount, double interestRate, int loanTerm) {
-        this.loanId = ++loanCounter; // Increment loan ID for each new loan
+        this.loanId = ++loanCounter;
         this.borrowerAccount = borrowerAccount;
         this.loanAmount = loanAmount;
         this.interestRate = interestRate;

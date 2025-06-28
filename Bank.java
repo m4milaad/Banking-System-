@@ -15,7 +15,7 @@ class Bank {
     public void approveLoan(Loan loan) {
         if (pendingLoans.remove(loan)) {
             approvedLoans.add(loan);
-            loan.approveLoan(); // This will deposit the loan amount into the borrower's account
+            loan.approveLoan();
             System.out.println("Loan approved successfully.");
         } else {
             System.out.println("Loan not found in pending loans.");
