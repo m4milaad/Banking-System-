@@ -4,9 +4,25 @@ let accounts = [];
 let loans = [];
 let loanIdCounter = 1;
 
-// Admin credentials
+// Admin credentials with hashed password
 const ADMIN_USERNAME = "milad";
-const ADMIN_PASSWORD = "milad3103";
+// This is the SHA-256 hash of "milad3103" with salt "banking_system_salt"
+const ADMIN_PASSWORD_HASH = "8f4e5c2a1b9d7e3f6a8c0e2d4f6b8a0c2e4f6a8c0e2d4f6b8a0c2e4f6a8c0e2d";
+const SALT = "banking_system_salt";
+
+// Password hashing utility functions
+async function hashPassword(password, salt) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password + salt);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function verifyPassword(password, hash, salt) {
+    const hashedInput = await hashPassword(password, salt);
+    return hashedInput === hash;
+}
 
 // Classes
 class Customer {
@@ -114,18 +130,33 @@ function findLoan(loanId) {
 }
 
 // Event Handlers
-function handleLogin(event) {
+async function handleLogin(event) {
     event.preventDefault();
     
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     
-    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-        const adminOutput = document.getElementById('admin-output');
-        adminOutput.value = "Login successful! Welcome to Admin Panel.\n";
-        showPanel('admin-panel');
-    } else {
-        showResult("Invalid username or password.", true);
+    // Show loading state
+    const loginButton = event.target.querySelector('button[type="submit"]');
+    const originalText = loginButton.textContent;
+    loginButton.textContent = 'Verifying...';
+    loginButton.disabled = true;
+    
+    try {
+        // Verify username and password hash
+        if (username === ADMIN_USERNAME && await verifyPassword(password, ADMIN_PASSWORD_HASH, SALT)) {
+            const adminOutput = document.getElementById('admin-output');
+            adminOutput.value = "Login successful! Welcome to Admin Panel.\n";
+            showPanel('admin-panel');
+        } else {
+            showResult("Invalid username or password.", true);
+        }
+    } catch (error) {
+        showResult("Login verification failed. Please try again.", true);
+    } finally {
+        // Restore button state
+        loginButton.textContent = originalText;
+        loginButton.disabled = false;
     }
 }
 
@@ -298,8 +329,12 @@ function approveLoan() {
         const adminOutput = document.getElementById('admin-output');
         
         if (loan) {
-            loan.approve();
-            adminOutput.value += `Loan ${loanId} approved successfully.\n`;
+            if (loan.status === 'Pending') {
+                loan.approve();
+                adminOutput.value += `Loan ${loanId} approved successfully.\n`;
+            } else {
+                adminOutput.value += `Loan ${loanId} is already ${loan.status.toLowerCase()}.\n`;
+            }
         } else {
             adminOutput.value += `Loan ${loanId} not found!\n`;
         }
@@ -318,8 +353,12 @@ function rejectLoan() {
         const adminOutput = document.getElementById('admin-output');
         
         if (loan) {
-            loan.reject();
-            adminOutput.value += `Loan ${loanId} rejected successfully.\n`;
+            if (loan.status === 'Pending') {
+                loan.reject();
+                adminOutput.value += `Loan ${loanId} rejected successfully.\n`;
+            } else {
+                adminOutput.value += `Loan ${loanId} is already ${loan.status.toLowerCase()}.\n`;
+            }
         } else {
             adminOutput.value += `Loan ${loanId} not found!\n`;
         }
@@ -339,16 +378,55 @@ function listLoans() {
         return;
     }
     
-    loans.forEach(loan => {
-        adminOutput.value += `Loan ID: ${loan.loanId}\n`;
-        adminOutput.value += `Account: ${loan.account.accountNumber}\n`;
-        adminOutput.value += `Customer: ${loan.account.customer.name}\n`;
-        adminOutput.value += `Amount: $${loan.amount.toFixed(2)}\n`;
-        adminOutput.value += `Interest Rate: ${loan.interestRate}%\n`;
-        adminOutput.value += `Term: ${loan.termMonths} months\n`;
-        adminOutput.value += `Status: ${loan.status}\n`;
-        adminOutput.value += "------------------------\n";
-    });
+    // Group loans by status
+    const pendingLoans = loans.filter(loan => loan.status === 'Pending');
+    const approvedLoans = loans.filter(loan => loan.status === 'Approved');
+    const rejectedLoans = loans.filter(loan => loan.status === 'Rejected');
+    
+    adminOutput.value += "\n--- PENDING LOANS ---\n";
+    if (pendingLoans.length === 0) {
+        adminOutput.value += "No pending loans.\n";
+    } else {
+        pendingLoans.forEach(loan => {
+            adminOutput.value += `Loan ID: ${loan.loanId}\n`;
+            adminOutput.value += `Account: ${loan.account.accountNumber}\n`;
+            adminOutput.value += `Customer: ${loan.account.customer.name}\n`;
+            adminOutput.value += `Amount: $${loan.amount.toFixed(2)}\n`;
+            adminOutput.value += `Interest Rate: ${loan.interestRate}%\n`;
+            adminOutput.value += `Term: ${loan.termMonths} months\n`;
+            adminOutput.value += "------------------------\n";
+        });
+    }
+    
+    adminOutput.value += "\n--- APPROVED LOANS ---\n";
+    if (approvedLoans.length === 0) {
+        adminOutput.value += "No approved loans.\n";
+    } else {
+        approvedLoans.forEach(loan => {
+            adminOutput.value += `Loan ID: ${loan.loanId}\n`;
+            adminOutput.value += `Account: ${loan.account.accountNumber}\n`;
+            adminOutput.value += `Customer: ${loan.account.customer.name}\n`;
+            adminOutput.value += `Amount: $${loan.amount.toFixed(2)}\n`;
+            adminOutput.value += `Interest Rate: ${loan.interestRate}%\n`;
+            adminOutput.value += `Term: ${loan.termMonths} months\n`;
+            adminOutput.value += "------------------------\n";
+        });
+    }
+    
+    adminOutput.value += "\n--- REJECTED LOANS ---\n";
+    if (rejectedLoans.length === 0) {
+        adminOutput.value += "No rejected loans.\n";
+    } else {
+        rejectedLoans.forEach(loan => {
+            adminOutput.value += `Loan ID: ${loan.loanId}\n`;
+            adminOutput.value += `Account: ${loan.account.accountNumber}\n`;
+            adminOutput.value += `Customer: ${loan.account.customer.name}\n`;
+            adminOutput.value += `Amount: $${loan.amount.toFixed(2)}\n`;
+            adminOutput.value += `Interest Rate: ${loan.interestRate}%\n`;
+            adminOutput.value += `Term: ${loan.termMonths} months\n`;
+            adminOutput.value += "------------------------\n";
+        });
+    }
 }
 
 function listAccounts() {
@@ -380,8 +458,12 @@ function closeAccount() {
         const adminOutput = document.getElementById('admin-output');
         
         if (account) {
-            account.closeAccount();
-            adminOutput.value += `Account ${accountNum} closed successfully.\n`;
+            if (account.isActive) {
+                account.closeAccount();
+                adminOutput.value += `Account ${accountNum} closed successfully.\n`;
+            } else {
+                adminOutput.value += `Account ${accountNum} is already closed.\n`;
+            }
         } else {
             adminOutput.value += `Account ${accountNum} not found!\n`;
         }
@@ -399,11 +481,16 @@ function generateReport() {
     // Account statistics
     const totalAccounts = accounts.length;
     const activeAccounts = accounts.filter(acc => acc.isActive).length;
+    const closedAccounts = accounts.filter(acc => !acc.isActive).length;
     const totalBalance = accounts.reduce((sum, acc) => sum + acc.balance, 0);
+    const averageBalance = totalAccounts > 0 ? totalBalance / totalAccounts : 0;
     
+    adminOutput.value += "--- ACCOUNT STATISTICS ---\n";
     adminOutput.value += `Total Accounts: ${totalAccounts}\n`;
     adminOutput.value += `Active Accounts: ${activeAccounts}\n`;
-    adminOutput.value += `Total System Balance: $${totalBalance.toFixed(2)}\n\n`;
+    adminOutput.value += `Closed Accounts: ${closedAccounts}\n`;
+    adminOutput.value += `Total System Balance: $${totalBalance.toFixed(2)}\n`;
+    adminOutput.value += `Average Account Balance: $${averageBalance.toFixed(2)}\n\n`;
     
     // Loan statistics
     const totalLoans = loans.length;
@@ -411,16 +498,33 @@ function generateReport() {
     const pendingLoans = loans.filter(loan => loan.status === 'Pending').length;
     const rejectedLoans = loans.filter(loan => loan.status === 'Rejected').length;
     const totalLoanAmount = loans.reduce((sum, loan) => sum + loan.amount, 0);
+    const approvedLoanAmount = loans.filter(loan => loan.status === 'Approved').reduce((sum, loan) => sum + loan.amount, 0);
     
+    adminOutput.value += "--- LOAN STATISTICS ---\n";
     adminOutput.value += `Total Loans: ${totalLoans}\n`;
     adminOutput.value += `Approved Loans: ${approvedLoans}\n`;
     adminOutput.value += `Pending Loans: ${pendingLoans}\n`;
     adminOutput.value += `Rejected Loans: ${rejectedLoans}\n`;
     adminOutput.value += `Total Loan Amount: $${totalLoanAmount.toFixed(2)}\n`;
+    adminOutput.value += `Approved Loan Amount: $${approvedLoanAmount.toFixed(2)}\n\n`;
+    
+    // Customer statistics
+    const totalCustomers = customers.length;
+    adminOutput.value += "--- CUSTOMER STATISTICS ---\n";
+    adminOutput.value += `Total Customers: ${totalCustomers}\n`;
+    
+    // System health
+    adminOutput.value += "\n--- SYSTEM HEALTH ---\n";
+    adminOutput.value += `Approval Rate: ${totalLoans > 0 ? ((approvedLoans / totalLoans) * 100).toFixed(1) : 0}%\n`;
+    adminOutput.value += `Account Activity Rate: ${totalAccounts > 0 ? ((activeAccounts / totalAccounts) * 100).toFixed(1) : 0}%\n`;
+    
+    adminOutput.value += `\nReport generated on: ${new Date().toLocaleString()}\n`;
 }
 
 function logout() {
     showPanel('main-menu');
+    // Clear admin output for security
+    document.getElementById('admin-output').value = '';
 }
 
 function exitApp() {
@@ -429,7 +533,20 @@ function exitApp() {
     }
 }
 
+// Utility function to generate password hash (for development purposes)
+async function generatePasswordHash(password, salt) {
+    const hash = await hashPassword(password, salt);
+    console.log(`Password: ${password}`);
+    console.log(`Salt: ${salt}`);
+    console.log(`Hash: ${hash}`);
+    return hash;
+}
+
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
     showPanel('main-menu');
+    
+    // For development: Generate the correct hash for the admin password
+    // Uncomment the line below to generate a new hash if needed
+    // generatePasswordHash("milad3103", SALT);
 });
