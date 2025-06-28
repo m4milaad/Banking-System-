@@ -139,7 +139,7 @@ public class BankingSystemGUI extends Frame implements ActionListener {
         
         Label titleLabel = new Label("Admin Login", Label.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2; gbc.insets = new Insets(20, 0, 30, 0);
+        gbc.gridx = 0; gbc.gridy = 0; gbc.gridwidth = 2; gbc.insets = new Insets(-70, 0, 30, 0);
         panel.add(titleLabel, gbc);
         
         gbc.gridwidth = 1; gbc.insets = new Insets(5, 10, 5, 10);
