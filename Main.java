@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Main {
     private static String adminUsername = "milad";
-    private static String adminPassword = "milad3103"; // In a real application, use hashed passwords
+    private static String adminPassword = "milad3103";
 
     public static void main(String[] args) {
         Bank bank = new Bank();
