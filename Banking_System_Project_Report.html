@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking System Project Report</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            line-height: 1.6;
+            margin: 40px;
+            color: #333;
+            background-color: #fff;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+        }
+        
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        
+        .authors {
+            font-size: 14px;
+            color: #34495e;
+            margin-top: 20px;
+        }
+        
+        .section {
+            margin: 30px 0;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .subsection-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #34495e;
+            margin: 20px 0 10px 0;
+        }
+        
+        .code-block {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        
+        .feature-list {
+            background-color: #f0f8ff;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .tech-stack {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+        
+        .screenshot-placeholder {
+            background-color: #ecf0f1;
+            border: 2px dashed #bdc3c7;
+            padding: 40px;
+            text-align: center;
+            color: #7f8c8d;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        .toc {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+        
+        .toc .level-1 {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .toc .level-2 {
+            padding-left: 40px;
+            color: #34495e;
+        }
+        
+        .conclusion {
+            background-color: #e8f5e8;
+            border-left: 4px solid #27ae60;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        @media print {
+            body {
+                margin: 20px;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="title">BANKING SYSTEM</div>
+        <div class="subtitle">A Comprehensive Java-Based Desktop Application</div>
+        <div class="subtitle">Project Report</div>
+        <div class="authors">
+            <strong>Developed by:</strong><br>
+            Nimra Wani • Milad Ajaz Bhat • Adnan Zargar • Mehdi Hafiz • Saliq Naqash
+        </div>
+    </div>
+
+    <div class="toc">
+        <div class="section-title">Table of Contents</div>
+        <ul>
+            <li class="level-1">1. Executive Summary</li>
+            <li class="level-1">2. Project Overview</li>
+            <li class="level-2">2.1 Objectives</li>
+            <li class="level-2">2.2 Scope</li>
+            <li class="level-1">3. System Features</li>
+            <li class="level-2">3.1 Customer Features</li>
+            <li class="level-2">3.2 Administrative Features</li>
+            <li class="level-1">4. Technical Architecture</li>
+            <li class="level-2">4.1 Technology Stack</li>
+            <li class="level-2">4.2 System Architecture</li>
+            <li class="level-1">5. Implementation Details</li>
+            <li class="level-2">5.1 Core Classes</li>
+            <li class="level-2">5.2 Java Concepts Utilized</li>
+            <li class="level-1">6. User Interface Design</li>
+            <li class="level-1">7. System Workflow</li>
+            <li class="level-1">8. Testing and Validation</li>
+            <li class="level-1">9. Limitations and Future Enhancements</li>
+            <li class="level-1">10. Conclusion</li>
+            <li class="level-1">11. Appendices</li>
+        </ul>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="section">
+        <div class="section-title">1. Executive Summary</div>
+        <p>
+            The Banking System is a comprehensive desktop application developed in Java that simulates the core functionalities of a modern banking system. This project demonstrates the practical application of Object-Oriented Programming principles, GUI development using AWT, and system design concepts.
+        </p>
+        <p>
+            The application provides a dual-interface approach, offering both a graphical user interface (GUI) and a command-line interface (CLI) to cater to different user preferences. The system manages customer accounts, processes financial transactions, handles loan applications, and provides administrative oversight capabilities.
+        </p>
+        <p>
+            Key achievements include the implementation of secure admin authentication, real-time transaction processing, comprehensive loan management, and an intuitive user interface that makes banking operations accessible to users of all technical backgrounds.
+        </p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">2. Project Overview</div>
+        
+        <div class="subsection-title">2.1 Objectives</div>
+        <p>The primary objectives of this Banking System project are:</p>
+        <ul>
+            <li><strong>Educational Purpose:</strong> Demonstrate mastery of Java programming concepts and Object-Oriented Programming principles</li>
+            <li><strong>Practical Application:</strong> Create a functional banking system that simulates real-world banking operations</li>
+            <li><strong>User Experience:</strong> Provide an intuitive interface for both customers and administrators</li>
+            <li><strong>System Design:</strong> Implement a scalable and maintainable software architecture</li>
+            <li><strong>Security Implementation:</strong> Incorporate basic security measures for administrative access</li>
+        </ul>
+
+        <div class="subsection-title">2.2 Scope</div>
+        <p>The Banking System encompasses the following functional areas:</p>
+        <ul>
+            <li>Customer account management (creation, closure, details management)</li>
+            <li>Financial transactions (deposits, withdrawals, balance inquiries)</li>
+            <li>Inter-account fund transfers</li>
+            <li>Loan application and approval workflow</li>
+            <li>Administrative oversight and reporting</li>
+            <li>Dual interface support (GUI and CLI)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title">3. System Features</div>
+        
+        <div class="subsection-title">3.1 Customer Features</div>
+        <div class="feature-list">
+            <ul>
+                <li><strong>Account Creation:</strong> Register new bank accounts with customer information</li>
+                <li><strong>Deposit Operations:</strong> Add funds to existing accounts with validation</li>
+                <li><strong>Withdrawal Services:</strong> Withdraw funds with insufficient balance protection</li>
+                <li><strong>Balance Inquiry:</strong> Check current account balance in real-time</li>
+                <li><strong>Fund Transfers:</strong> Transfer money between accounts with verification</li>
+                <li><strong>Loan Applications:</strong> Apply for loans with customizable terms and interest rates</li>
+            </ul>
+        </div>
+
+        <div class="subsection-title">3.2 Administrative Features</div>
+        <div class="feature-list">
+            <ul>
+                <li><strong>Secure Login:</strong> Password-protected admin access</li>
+                <li><strong>Loan Management:</strong> Approve or reject pending loan applications</li>
+                <li><strong>Account Oversight:</strong> View all customer accounts and their details</li>
+                <li><strong>Account Closure:</strong> Close customer accounts when required</li>
+                <li><strong>System Reports:</strong> Generate comprehensive banking reports</li>
+                <li><strong>Loan Portfolio:</strong> View all loans (pending and approved)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">4. Technical Architecture</div>
+        
+        <div class="subsection-title">4.1 Technology Stack</div>
+        <div class="tech-stack">
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>Technology</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>Programming Language</td>
+                    <td>Java SE (Standard Edition)</td>
+                    <td>Core application development</td>
+                </tr>
+                <tr>
+                    <td>GUI Framework</td>
+                    <td>AWT (Abstract Window Toolkit)</td>
+                    <td>Graphical user interface development</td>
+                </tr>
+                <tr>
+                    <td>Data Storage</td>
+                    <td>In-Memory Collections (ArrayList)</td>
+                    <td>Runtime data management</td>
+                </tr>
+                <tr>
+                    <td>Input/Output</td>
+                    <td>Java I/O Streams, Scanner</td>
+                    <td>User input and console output</td>
+                </tr>
+                <tr>
+                    <td>Event Handling</td>
+                    <td>AWT Event Model</td>
+                    <td>User interaction processing</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="subsection-title">4.2 System Architecture</div>
+        <p>The Banking System follows a layered architecture pattern with clear separation of concerns:</p>
+        
+        <div class="code-block">
+┌─────────────────────────────────────┐
+│           Presentation Layer         │
+│  ┌─────────────┐  ┌─────────────┐   │
+│  │ GUI (AWT)   │  │ CLI (Main)  │   │
+│  └─────────────┘  └─────────────┘   │
+└─────────────────────────────────────┘
+┌─────────────────────────────────────┐
+│           Business Logic Layer       │
+│  ┌─────────────────────────────────┐ │
+│  │         Bank Class              │ │
+│  │  (Core Banking Operations)      │ │
+│  └─────────────────────────────────┘ │
+└─────────────────────────────────────┘
+┌─────────────────────────────────────┐
+│           Data Model Layer          │
+│  ┌──────────┐ ┌──────────┐ ┌──────┐ │
+│  │BankAccount│ │Customer  │ │Loan  │ │
+│  └──────────┘ └──────────┘ └──────┘ │
+└─────────────────────────────────────┘
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="section">
+        <div class="section-title">5. Implementation Details</div>
+        
+        <div class="subsection-title">5.1 Core Classes</div>
+        
+        <p><strong>Bank.java</strong> - Central Management Class</p>
+        <div class="code-block">
+Key Responsibilities:
+• Manages collections of accounts, customers, and loans
+• Processes loan approvals and rejections
+• Generates system reports
+• Provides account lookup and management services
+
+Key Methods:
+- addAccount(BankAccount account)
+- findAccount(int accountNumber)
+- addLoans(Loan loan)
+- approveLoan(Loan loan)
+- generateReport()
+        </div>
+
+        <p><strong>BankAccount.java</strong> - Account Operations</p>
+        <div class="code-block">
+Key Responsibilities:
+• Handles individual account operations
+• Manages account balance and transactions
+• Processes deposits, withdrawals, and transfers
+• Maintains account details and customer association
+
+Key Methods:
+- deposit(double amount)
+- withdraw(double amount)
+- checkBalance()
+- transferFunds(BankAccount targetAccount, double amount)
+- getAccountDetails()
+        </div>
+
+        <p><strong>Customer.java</strong> - Customer Information Management</p>
+        <div class="code-block">
+Key Responsibilities:
+• Stores customer personal information
+• Manages customer registration and updates
+• Provides customer detail retrieval
+
+Key Attributes:
+- customerId (final int)
+- name, email, phone (String)
+
+Key Methods:
+- registerCustomer()
+- updateCustomerDetails()
+- getCustomerDetails()
+        </div>
+
+        <p><strong>Loan.java</strong> - Loan Management</p>
+        <div class="code-block">
+Key Responsibilities:
+• Manages loan applications and approvals
+• Tracks loan status and details
+• Handles loan-to-account associations
+
+Key Attributes:
+- loanId (auto-generated)
+- borrowerAccount, loanAmount, interestRate, loanTerm
+- isApproved (boolean status)
+
+Key Methods:
+- applyForLoan()
+- approveLoan()
+- viewLoanDetails()
+        </div>
+
+        <p><strong>BankingSystemGUI.java</strong> - User Interface</p>
+        <div class="code-block">
+Key Responsibilities:
+• Implements complete graphical user interface
+• Handles user interactions and events
+• Manages multiple panels using CardLayout
+• Integrates with business logic layer
+
+Key Components:
+- CardLayout for panel switching
+- Multiple specialized panels (login, transactions, admin)
+- Event handling for all user actions
+- Input validation and error handling
+        </div>
+
+        <div class="subsection-title">5.2 Java Concepts Utilized</div>
+        
+        <table>
+            <tr>
+                <th>Concept Category</th>
+                <th>Specific Concepts</th>
+                <th>Implementation Examples</th>
+            </tr>
+            <tr>
+                <td>Object-Oriented Programming</td>
+                <td>Classes, Objects, Encapsulation, Inheritance</td>
+                <td>BankingSystemGUI extends Frame, private fields with public methods</td>
+            </tr>
+            <tr>
+                <td>Data Structures</td>
+                <td>ArrayList, Collections</td>
+                <td>Managing accounts, customers, and loans in Bank class</td>
+            </tr>
+            <tr>
+                <td>GUI Programming</td>
+                <td>AWT Components, Layout Managers, Event Handling</td>
+                <td>Complete GUI with multiple panels and user interactions</td>
+            </tr>
+            <tr>
+                <td>Exception Handling</td>
+                <td>try-catch blocks, NumberFormatException</td>
+                <td>Input validation in GUI components</td>
+            </tr>
+            <tr>
+                <td>I/O Operations</td>
+                <td>Scanner, System.out, Stream redirection</td>
+                <td>CLI input and console output capture for GUI display</td>
+            </tr>
+            <tr>
+                <td>Control Structures</td>
+                <td>if-else, switch, loops</td>
+                <td>Menu handling, validation logic, collection iteration</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="section-title">6. User Interface Design</div>
+        
+        <p>The Banking System features a comprehensive GUI built using Java AWT, designed with user experience and functionality in mind.</p>
+        
+        <div class="subsection-title">6.1 Interface Components</div>
+        <ul>
+            <li><strong>Main Menu:</strong> Central navigation hub with access to all primary functions</li>
+            <li><strong>Account Creation Panel:</strong> Form-based interface for new account registration</li>
+            <li><strong>Transaction Panels:</strong> Specialized interfaces for deposits, withdrawals, and balance checks</li>
+            <li><strong>Transfer Panel:</strong> Dedicated interface for inter-account fund transfers</li>
+            <li><strong>Loan Application Panel:</strong> Comprehensive form for loan applications</li>
+            <li><strong>Admin Panel:</strong> Secure administrative interface with management tools</li>
+            <li><strong>Results Display:</strong> Dedicated panel for transaction confirmations and results</li>
+        </ul>
+
+        <div class="subsection-title">6.2 Layout Management</div>
+        <p>The application utilizes multiple AWT layout managers for optimal component arrangement:</p>
+        <ul>
+            <li><strong>CardLayout:</strong> Main panel switching mechanism</li>
+            <li><strong>GridBagLayout:</strong> Flexible form layouts with precise component positioning</li>
+            <li><strong>BorderLayout:</strong> Standard panel organization with distinct regions</li>
+            <li><strong>FlowLayout:</strong> Simple component arrangement for button groups</li>
+            <li><strong>GridLayout:</strong> Uniform component distribution in admin panel</li>
+        </ul>
+
+        <div class="screenshot-placeholder">
+            [Screenshot: Main Menu Interface]<br>
+            Central navigation with clearly labeled buttons for all major functions
+        </div>
+
+        <div class="screenshot-placeholder">
+            [Screenshot: Admin Panel Interface]<br>
+            Comprehensive administrative dashboard with loan management and reporting tools
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">7. System Workflow</div>
+        
+        <div class="subsection-title">7.1 Customer Account Creation Workflow</div>
+        <div class="code-block">
+1. User selects "Create Account" from main menu
+2. System displays account creation form
+3. User enters customer details (name, email, phone)
+4. System auto-generates unique account number
+5. User selects account type (Savings/Current)
+6. System validates input data
+7. New Customer and BankAccount objects created
+8. Account added to bank's account collection
+9. Success confirmation displayed to user
+        </div>
+
+        <div class="subsection-title">7.2 Transaction Processing Workflow</div>
+        <div class="code-block">
+1. User selects transaction type (Deposit/Withdraw/Check Balance)
+2. System displays appropriate transaction form
+3. User enters account number and amount (if applicable)
+4. System validates account existence
+5. System performs balance checks (for withdrawals)
+6. Transaction processed and account balance updated
+7. Transaction confirmation displayed
+8. User returned to main menu
+        </div>
+
+        <div class="subsection-title">7.3 Loan Application and Approval Workflow</div>
+        <div class="code-block">
+Customer Side:
+1. User selects "Apply for Loan"
+2. System displays loan application form
+3. User enters loan details (amount, interest rate, term)
+4. System validates account and creates loan object
+5. Loan added to pending loans collection
+6. Application confirmation with loan ID provided
+
+Admin Side:
+1. Admin logs into admin panel
+2. Admin views pending loans list
+3. Admin selects loan for approval/rejection
+4. For approval: loan amount deposited to borrower account
+5. Loan moved from pending to approved collection
+6. Status update confirmation displayed
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="section">
+        <div class="section-title">8. Testing and Validation</div>
+        
+        <div class="subsection-title">8.1 Testing Approach</div>
+        <p>The Banking System underwent comprehensive testing to ensure reliability and functionality:</p>
+        
+        <table>
+            <tr>
+                <th>Test Category</th>
+                <th>Test Cases</th>
+                <th>Expected Results</th>
+            </tr>
+            <tr>
+                <td>Account Creation</td>
+                <td>Valid customer data, duplicate account numbers, empty fields</td>
+                <td>Successful creation, proper error handling, input validation</td>
+            </tr>
+            <tr>
+                <td>Transaction Processing</td>
+                <td>Valid deposits, overdraft attempts, invalid amounts</td>
+                <td>Balance updates, insufficient funds protection, input validation</td>
+            </tr>
+            <tr>
+                <td>Fund Transfers</td>
+                <td>Valid transfers, non-existent accounts, insufficient funds</td>
+                <td>Successful transfers, proper error messages, balance verification</td>
+            </tr>
+            <tr>
+                <td>Loan Management</td>
+                <td>Loan applications, approvals, rejections</td>
+                <td>Proper loan tracking, status updates, amount deposits</td>
+            </tr>
+            <tr>
+                <td>Admin Functions</td>
+                <td>Login authentication, account management, reporting</td>
+                <td>Secure access, accurate data display, comprehensive reports</td>
+            </tr>
+        </table>
+
+        <div class="subsection-title">8.2 Validation Mechanisms</div>
+        <ul>
+            <li><strong>Input Validation:</strong> Numeric field validation, empty field checks</li>
+            <li><strong>Business Logic Validation:</strong> Sufficient balance checks, account existence verification</li>
+            <li><strong>Security Validation:</strong> Admin credential verification</li>
+            <li><strong>Data Integrity:</strong> Consistent account balances, proper loan status tracking</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title">9. Limitations and Future Enhancements</div>
+        
+        <div class="subsection-title">9.1 Current Limitations</div>
+        <ul>
+            <li><strong>Data Persistence:</strong> All data stored in memory; no database integration</li>
+            <li><strong>Customer Authentication:</strong> No login system for individual customers</li>
+            <li><strong>Transaction History:</strong> No historical transaction tracking</li>
+            <li><strong>UI Constraints:</strong> Limited styling options due to AWT framework</li>
+            <li><strong>Concurrent Access:</strong> No multi-user support or thread safety</li>
+            <li><strong>Security:</strong> Basic admin authentication without encryption</li>
+        </ul>
+
+        <div class="subsection-title">9.2 Proposed Future Enhancements</div>
+        <ul>
+            <li><strong>Database Integration:</strong> Implement SQLite or MySQL for data persistence</li>
+            <li><strong>Modern UI Framework:</strong> Migrate to JavaFX or Swing for enhanced user experience</li>
+            <li><strong>Customer Login System:</strong> Individual customer authentication and sessions</li>
+            <li><strong>Transaction History:</strong> Comprehensive transaction logging and reporting</li>
+            <li><strong>Security Enhancements:</strong> Password hashing, session management, encryption</li>
+            <li><strong>Multi-threading:</strong> Support for concurrent user access</li>
+            <li><strong>Web Interface:</strong> Browser-based interface for remote access</li>
+            <li><strong>Mobile Application:</strong> Native mobile app development</li>
+            <li><strong>Advanced Reporting:</strong> Detailed analytics and financial reports</li>
+            <li><strong>Integration APIs:</strong> External system integration capabilities</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title">10. Conclusion</div>
+        
+        <div class="conclusion">
+            <p>
+                The Banking System project successfully demonstrates the practical application of Java programming concepts in developing a comprehensive desktop application. The project achieves its primary objectives of showcasing Object-Oriented Programming principles, GUI development skills, and system design capabilities.
+            </p>
+            
+            <p>
+                <strong>Key Achievements:</strong>
+            </p>
+            <ul>
+                <li>Successful implementation of core banking functionalities</li>
+                <li>Intuitive user interface supporting both GUI and CLI interactions</li>
+                <li>Robust error handling and input validation</li>
+                <li>Secure administrative access and management capabilities</li>
+                <li>Scalable architecture supporting future enhancements</li>
+            </ul>
+            
+            <p>
+                <strong>Learning Outcomes:</strong>
+            </p>
+            <ul>
+                <li>Mastery of Java OOP concepts and their practical application</li>
+                <li>Experience with GUI development using AWT framework</li>
+                <li>Understanding of system architecture and design patterns</li>
+                <li>Implementation of business logic and data management</li>
+                <li>Project management and collaborative development skills</li>
+            </ul>
+            
+            <p>
+                The Banking System serves as a solid foundation for understanding enterprise application development and provides a platform for future enhancements and learning opportunities. The project demonstrates the team's ability to design, implement, and deliver a functional software solution that addresses real-world requirements.
+            </p>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="section">
+        <div class="section-title">11. Appendices</div>
+        
+        <div class="subsection-title">Appendix A: System Requirements</div>
+        <table>
+            <tr>
+                <th>Component</th>
+                <th>Requirement</th>
+            </tr>
+            <tr>
+                <td>Operating System</td>
+                <td>Windows, macOS, or Linux with Java support</td>
+            </tr>
+            <tr>
+                <td>Java Version</td>
+                <td>Java SE 8 or higher</td>
+            </tr>
+            <tr>
+                <td>Memory</td>
+                <td>Minimum 512 MB RAM</td>
+            </tr>
+            <tr>
+                <td>Storage</td>
+                <td>10 MB available disk space</td>
+            </tr>
+            <tr>
+                <td>Display</td>
+                <td>800x600 minimum resolution</td>
+            </tr>
+        </table>
+
+        <div class="subsection-title">Appendix B: Installation and Setup</div>
+        <div class="code-block">
+Installation Steps:
+1. Ensure Java SE 8+ is installed on the system
+2. Clone or download the project repository
+3. Navigate to the project directory
+4. Compile all Java files: javac *.java
+5. Run the application: java Main
+6. Select interface preference (GUI or CLI)
+
+Default Admin Credentials:
+- Username: admin
+- Password: admin3103
+
+CLI Admin Credentials:
+- Username: milad
+- Password: milad3103
+        </div>
+
+        <div class="subsection-title">Appendix C: File Structure</div>
+        <div class="code-block">
+Banking-System/
+├── Main.java                   # Application entry point
+├── BankingSystemGUI.java       # GUI implementation
+├── Bank.java                   # Core banking logic
+├── BankAccount.java            # Account management
+├── Customer.java               # Customer data model
+├── Loan.java                   # Loan management
+├── README.md                   # Project documentation
+└── .gitignore                  # Git ignore rules
+        </div>
+
+        <div class="subsection-title">Appendix D: Team Contributions</div>
+        <table>
+            <tr>
+                <th>Team Member</th>
+                <th>Primary Contributions</th>
+            </tr>
+            <tr>
+                <td>Nimra Wani</td>
+                <td>GUI Design and Implementation, User Experience</td>
+            </tr>
+            <tr>
+                <td>Milad Ajaz Bhat</td>
+                <td>Core Banking Logic, System Architecture</td>
+            </tr>
+            <tr>
+                <td>Adnan Zargar</td>
+                <td>Loan Management System, Business Logic</td>
+            </tr>
+            <tr>
+                <td>Mehdi Hafiz</td>
+                <td>Customer Management, Data Models</td>
+            </tr>
+            <tr>
+                <td>Saliq Naqash</td>
+                <td>CLI Implementation, Testing and Validation</td>
+            </tr>
+        </table>
+    </div>
+
+    <div style="margin-top: 50px; text-align: center; color: #7f8c8d; font-size: 12px;">
+        <hr style="border: 1px solid #bdc3c7; margin: 30px 0;">
+        <p>Banking System Project Report</p>
+        <p>Academic Year 2024-2025</p>
+        <p>Generated on: <span id="current-date"></span></p>
+    </div>
+
+    <script>
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString();
+    </script>
+</body>
+</html>
