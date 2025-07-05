@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class Main {
-    private static String adminUsername = "milad";
-    private static String adminPassword = "milad3103";
+    private static String adminUsername = "admin";
+    private static String adminPassword = "admin3103";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
