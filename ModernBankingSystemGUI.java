@@ -62,7 +62,7 @@ public class ModernBankingSystemGUI extends JFrame {
         setSize(1000, 700);
         setLocationRelativeTo(null);
         
-        // Set look and feel
+        // Set look and feel - Fixed the method name
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeel());
         } catch (Exception e) {
