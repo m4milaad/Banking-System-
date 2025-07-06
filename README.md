@@ -40,7 +40,7 @@ A sophisticated desktop banking application built with Java Swing, featuring a m
 ## 🗂️ Project Structure
 ```
 Banking-System/
-├── Main.java                    # Application launcher with interface selection
+├── Main.java                    # Application launcher with interface 
 ├── ModernBankingSystemGUI.java  # Complete modern Swing-based interface
 ├── Bank.java                    # Core banking logic and account management
 ├── BankAccount.java             # Account operations and transaction handling
@@ -76,7 +76,7 @@ Banking-System/
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/Banking-System.git
+   git clone https://github.com/m4milaad/Banking-System.git
    cd Banking-System
    ```
 
@@ -187,7 +187,11 @@ The admin panel includes:
 - Verify input validation with edge cases (negative amounts, empty fields)
 
 ## 👥 Development Team
-This project was developed as a collaborative effort to demonstrate modern Java GUI development and banking system architecture.
+- Nimra Wani
+- Milad Ajaz Bhat
+- Adnan Zargar
+- Saliq Naqash
+- Mehdi Hafiz 
 
 ## 📄 License
 This project is developed for educational purposes to demonstrate:
