@@ -8,22 +8,15 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=== Banking System ===");
         System.out.println("1. Modern GUI (Swing)");
-        System.out.println("2. Legacy GUI (AWT)");
-        System.out.println("3. Command Line Interface");
+        System.out.println("2. Command Line Interface");
         System.out.print("Enter choice: ");
         
         int UIChoice = scanner.nextInt();
         
         if (UIChoice == 1) {
-            // Launch modern Swing GUI
             javax.swing.SwingUtilities.invokeLater(() -> new ModernBankingSystemGUI());
-        }
+        } 
         else if (UIChoice == 2) {
-            // Launch legacy AWT GUI
-            new BankingSystemGUI();
-        }
-        else if (UIChoice == 3) {
-            // Launch CLI version
             runCLI(scanner);
         } else {
             System.out.println("Invalid option selected!");
