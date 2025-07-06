@@ -6,110 +6,130 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("1. GUI");
-        System.out.println("2. CLI");
+        System.out.println("=== Banking System ===");
+        System.out.println("1. Modern GUI (Swing)");
+        System.out.println("2. Legacy GUI (AWT)");
+        System.out.println("3. Command Line Interface");
         System.out.print("Enter choice: ");
+        
         int UIChoice = scanner.nextInt();
+        
         if (UIChoice == 1) {
-            new BankingSystemGUI();
+            // Launch modern Swing GUI
+            javax.swing.SwingUtilities.invokeLater(() -> new ModernBankingSystemGUI());
         }
         else if (UIChoice == 2) {
-            Bank bank = new Bank();
+            // Launch legacy AWT GUI
+            new BankingSystemGUI();
+        }
+        else if (UIChoice == 3) {
+            // Launch CLI version
+            runCLI(scanner);
+        } else {
+            System.out.println("Invalid option selected!");
+            System.out.println("Exiting...");
+        }
+        
+        if (UIChoice == 3) {
+            scanner.close();
+        }
+    }
+    
+    private static void runCLI(Scanner scanner) {
+        Bank bank = new Bank();
+        boolean exit = false;
 
-            boolean exit = false;
+        while (!exit) {
+            System.out.println("\n===== Banking System Menu =====");
+            System.out.println("1. Login as Admin");
+            System.out.println("2. Create Account");
+            System.out.println("3. Deposit");
+            System.out.println("4. Withdraw");
+            System.out.println("5. Check Balance");
+            System.out.println("6. Transfer Funds");
+            System.out.println("7. Apply for Loan");
+            System.out.println("8. Exit");
+            System.out.print("Enter your choice: ");
 
-            while (!exit) {
-                System.out.println("\n===== Banking System Menu =====");
-                System.out.println("1. Login as Admin");
-                System.out.println("2. Create Account");
-                System.out.println("3. Deposit");
-                System.out.println("4. Withdraw");
-                System.out.println("5. Check Balance");
-                System.out.println("6. Transfer Funds");
-                System.out.println("7. Apply for Loan");
-                System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
 
-                int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    if (adminLogin(scanner)) {
+                        boolean adminExit = false;
+                        while (!adminExit) {
+                            System.out.println("\n===== Admin Menu =====");
+                            System.out.println("1. Approve Loan");
+                            System.out.println("2. Reject Loan");
+                            System.out.println("3. List All Loans");
+                            System.out.println("4. List All Accounts");
+                            System.out.println("5. Close Account");
+                            System.out.println("6. Generate Report");
+                            System.out.println("7. Logout");
+                            System.out.println("8. Exit");
+                            System.out.print("Enter your choice: ");
 
-                switch (choice) {
-                    case 1:
-                        if (adminLogin(scanner)) {
-                            boolean adminExit = false;
-                            while (!adminExit) {
-                                System.out.println("\n===== Admin Menu =====");
-                                System.out.println("1. Approve Loan");
-                                System.out.println("2. Reject Loan");
-                                System.out.println("3. List All Loans");
-                                System.out.println("4. List All Accounts");
-                                System.out.println("5. Close Account");
-                                System.out.println("6. Generate Report");
-                                System.out.println("7. Logout");
-                                System.out.println("8. Exit");
-                                System.out.print("Enter your choice: ");
+                            int adminChoice = scanner.nextInt();
 
-                                int adminChoice = scanner.nextInt();
-
-                                switch (adminChoice) {
-                                    case 1:
-                                        approveLoan(bank, scanner);
-                                        break;
-                                    case 2:
-                                        rejectLoan(bank, scanner);
-                                        break;
-                                    case 3:
-                                        bank.listAllLoans();
-                                        break;
-                                    case 4:
-                                        bank.listAllAccounts();
-                                        break;
-                                    case 5:
-                                        closeAccount(bank, scanner);
-                                        break;
-                                    case 6:
-                                        bank.generateReport();
-                                        break;
-                                    case 7:
-                                        adminExit = true;
-                                        break;
-                                    case 8:
-                                        adminExit = true;
-                                        exit = true;
-                                        System.out.println("Thank you for using the banking system!");
-                                        break;
-                                    default:
-                                        System.out.println("Invalid choice. Please try again.");
-                                }
+                            switch (adminChoice) {
+                                case 1:
+                                    approveLoan(bank, scanner);
+                                    break;
+                                case 2:
+                                    rejectLoan(bank, scanner);
+                                    break;
+                                case 3:
+                                    bank.listAllLoans();
+                                    break;
+                                case 4:
+                                    bank.listAllAccounts();
+                                    break;
+                                case 5:
+                                    closeAccount(bank, scanner);
+                                    break;
+                                case 6:
+                                    bank.generateReport();
+                                    break;
+                                case 7:
+                                    adminExit = true;
+                                    break;
+                                case 8:
+                                    adminExit = true;
+                                    exit = true;
+                                    System.out.println("Thank you for using the banking system!");
+                                    break;
+                                default:
+                                    System.out.println("Invalid choice. Please try again.");
                             }
                         }
-                        break;
-                    case 2:
-                        createAccount(bank, scanner);
-                        break;
-                    case 3:
-                        deposit(bank, scanner);
-                        break;
-                    case 4:
-                        withdraw(bank, scanner);
-                        break;
-                    case 5:
-                        checkBalance(bank, scanner);
-                        break;
-                    case 6:
-                        transferFunds(bank, scanner);
-                        break;
-                    case 7:
-                        applyForLoan(bank, scanner);
-                        break;
-                    default:
-                        System.out.println("Invalid choice. Please try again.");
-                }
+                    }
+                    break;
+                case 2:
+                    createAccount(bank, scanner);
+                    break;
+                case 3:
+                    deposit(bank, scanner);
+                    break;
+                case 4:
+                    withdraw(bank, scanner);
+                    break;
+                case 5:
+                    checkBalance(bank, scanner);
+                    break;
+                case 6:
+                    transferFunds(bank, scanner);
+                    break;
+                case 7:
+                    applyForLoan(bank, scanner);
+                    break;
+                case 8:
+                    exit = true;
+                    System.out.println("Thank you for using the banking system!");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
             }
-
-        } else {
-            System.out.println("No option detetcted!");
-            System.out.println("Exiting");
         }
-        scanner.close();
     }
 
     private static boolean adminLogin(Scanner scanner) {
